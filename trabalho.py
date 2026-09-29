@@ -95,21 +95,31 @@ flag_ativo = True
 while flag_ativo:
     print(menu)
     escolha_menu = int(input("Escolhe uma opção: \n"))
+    if escolha_menu < 0 or escolha_menu > 8:
+        
+    if escolha_menu == 0:
+        print()
     if escolha_menu == 1:
         if not inventario:
-            print('___')  # mensagem de inventário vazio
+            print('O inventário está vazio.')
         else:
             print('CÓDIGO | NOME | SALA | QUANTIDADE | ESTADO')
             for codigo in sorted(inventario):
                 item = inventario[codigo]
-                print(f"{codigo} | {item['nome'].___()} | {item['___']} | "
-                      f"{item['___']} un. | {item['___']}")
-            print(f"Total de registos: {(inventario)}")
+                print(codigo, "|", item['nome'], "|", item['sala'], "|", item['quantidade'], "un. |", item['estado'])
+            print("Total de registos:", len(inventario))
+    elif escolha_menu == 2:
+        codigo = input('Qual o codigo do produto que queres? ').strip().upper()
+        if codigo == '':
+            continue
+        elif codigo not in inventario
+            print("Nao existe nada no inventario com esse codigo! ")
+            continue
+        elif codigo in iventario
+
+
+
 
     
 
     
-
-
-
-
