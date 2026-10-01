@@ -115,27 +115,66 @@ while flag_ativo:
             print("Total de registos:", len(inventario))
     elif escolha_menu == 2:
         codigo = input("Código do equipamento: ").strip().upper()
-    if codigo == '':
-        print("O código não pode estar vazio.")
-        continue
-    if codigo in inventario:
-        print("Esse código já existe.")
-        continue
-
-    nome = input("Qual o nomo do produto? ").strip()
-    while nome == '':
-        print("Tens de dizer algum nome de algum produto!")
-        nome = input("Qual o nome do seu produto novamente?").strip()
+        if codigo == '':
+            print("O código não pode estar vazio.")
+            continue
+        if codigo in inventario:
+            print("Esse código já existe.")
+            continue
+    
+        nome = input("Qual o nomo do produto? ").strip()
+        while nome == '':
+            print("Tens de dizer algum nome de algum produto!")
+            nome = input("Qual o nome do seu produto novamente?").strip()
         
-    tipo = input(f"Tipos existentes neste momento: {tipos}").strip().lower()
-    while tipo not in tipos:
-        print("Dame algum tipo valido! ")
         tipo = input(f"Tipos existentes neste momento: {tipos}").strip().lower()
+        while tipo not in tipos:
+            print("Dame algum tipo valido! ")
+            tipo = input(f"Tipos existentes neste momento: {tipos}").strip().lower()
 
-    sala = input(f"Qual e sala que tu queres: {SALAS}").strip().upper()
-    while sala not in SALAS:
-        print("Essa sala nao existe escolhe uma valida! ")
-        sala = input(f"Salas existentes: {SALAS}").strip().upper()
+        sala = input(f"Qual e sala que tu queres: {SALAS}").strip().upper()
+        while sala not in SALAS:
+            print("Essa sala nao existe escolhe uma valida! ")
+            sala = input(f"Salas existentes: {SALAS}").strip().upper()
+
+        quantidade = int(input("Quantos tu queres adicionar?"))
+        while quantidade <= 0:
+            print("Escolhe um numero valido")
+            quantidade = int(input("Quantos tu queres adicionar?"))
+
+        inventario[codigo] = {
+            'nome': nome,
+            'tipo': tipo,
+            'sala': sala,
+            'quantidade': quantidade,
+            'estado': 'operacional'
+        }
+        historico.append(f"Adicionaste corretamente o Codigo : {codigo}: ({tipo.strip().upper().title()})")
+        print("Parabéns adicionaste o material com sucesso! ")
+
+    elif escolha_menu == 3:
+        for codigo in sorted(inventario):
+                item = inventario[codigo]
+                print(codigo, "|", item['nome'])
+            
+        pesquisa = input("Insere um codigo de algum produto valido:").strip().upper()
+        equipamento = inventario.get(pesquisa)
+        
+        if equipamento:
+            print(f"Informação do {pesquisa}")
+            for chave, valor in equipamento.items():
+                print(f"\n{chave.title().strip()}")
+                print(str(valor).title())        
+        else:
+            print("Esse codigo nao e valido tenta denovo! ")
+        
+
+      
+
+
+        
+
+
 
     
 
