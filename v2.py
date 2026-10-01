@@ -78,26 +78,26 @@ for reparavel in inventario:
 reparados = []
 historico = []
 #menu coms os += para mostrar o menu
-menu = '\n------------Menu DE INVENTÁRIO -----------|\n'
-menu += '| 1 - Mostrar equipamentos                 |'
-menu += '| 2 - Adicionar mais equipamento           |' 
-menu += '| 3 - Pesquisar nos equipamento existentes |'
-menu += '| 4 - Alterar o estado de um equipamento   |'
-menu += '| 5 - Remover um equipamento               |'
-menu += '| 6 - Lista de reparação                   |'
-menu += '| 7 - Estatísticas                         |'                
-menu += '| 8 - Histórico de operações               |'
-menu += '| 0 - Sair                                 |'
-menu += '--------------------------------------------'
+menu = '\n-------------- MENU DE INVENTÁRIO --------------\n'
+menu += '| 1 - Mostrar equipamentos                      |\n'
+menu += '| 2 - Adicionar mais equipamento                |\n'
+menu += '| 3 - Pesquisar nos equipamentos existentes     |\n'
+menu += '| 4 - Alterar o estado de um equipamento        |\n'
+menu += '| 5 - Remover um equipamento                    |\n'
+menu += '| 6 - Lista de reparação                        |\n'
+menu += '| 7 - Estatísticas                              |\n'
+menu += '| 8 - Histórico de operações                    |\n'
+menu += '| 0 - Sair                                      |\n'
+menu += '----------------------------------------------'
 #a flag que aprendi a poucas aulas mas da jeito
 flag_ativo = True
 
 while flag_ativo:
     print(menu)
-    escolha_menu = int(input("Escolhe uma opção: \n"))
+    escolha_menu = int(input("Escolhe uma opção de 0 a 8: \n"))
     if escolha_menu < 0 or escolha_menu > 8:
-        print("Isso não existe! Tenta Novamente")
-        continue        
+        print("Isso não existe! Tenta Novamente")    
+        continue
     if escolha_menu == 0:
         op = input("Queres sair do programa (y/n)?")
         if op == 'y':
@@ -114,18 +114,30 @@ while flag_ativo:
                 print(codigo, "|", item['nome'], "|", item['sala'], "|", item['quantidade'], "un. |", item['estado'])
             print("Total de registos:", len(inventario))
     elif escolha_menu == 2:
-        codigo = input("Qual o codigo do produto que queres? ").strip().upper()
-        if codigo == '':
-            continue
-        elif codigo not in inventario:
-            print("Nao existe nada no inventario com esse codigo! ")
-            continue
-        elif codigo in inventario:
-        nome = input("Qual o nome do teu dispositivo")
-        if nome == '':
-            continue
-        tipo1 = input("Qual tipo de dispositivo tu queres?"\n
-        item['tipo'])
+        codigo = input("Código do equipamento: ").strip().upper()
+    if codigo == '':
+        print("O código não pode estar vazio.")
+        continue
+    if codigo in inventario:
+        print("Esse código já existe.")
+        continue
+
+    nome = input("Qual o nomo do produto? ").strip()
+    while nome == '':
+        print("Tens de dizer algum nome de algum produto!")
+        nome = input("Qual o nome do seu produto novamente?").strip()
+        
+    tipo = input(f"Tipos existentes neste momento: {tipos}").strip().lower()
+    while tipo not in tipos:
+        print("Dame algum tipo valido! ")
+        tipo = input(f"Tipos existentes neste momento: {tipos}").strip().lower()
+
+    sala = input(f"Qual e sala que tu queres: {SALAS}").strip().upper()
+    while sala not in SALAS:
+        print("Essa sala nao existe escolhe uma valida! ")
+        sala = input(f"Salas existentes: {SALAS}").strip().upper()
+
+    
 
         
         
