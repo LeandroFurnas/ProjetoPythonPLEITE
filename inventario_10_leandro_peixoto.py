@@ -139,25 +139,25 @@ while flag_ativo:
 
         nome = input("Qual o nome do produto? ").strip()
         while nome == '':
-            print("Tens de dizer algum nome de algum produto!")
-            nome = input("Qual o nome do seu produto novamente?").strip()
+            print("Tens de dizer algum nome de algum produto! ")
+            nome = input("Qual o nome do seu produto novamente? " ).strip()
 
         tipo = input(
-            f"Tipos existentes neste momento: {tipos}").strip().lower()
+            f"Tipos existentes neste momento: {tipos}:\n").strip().lower()
         while tipo not in tipos:
             print("Dá-me algum tipo válido! ")
             tipo = input(
-                f"Tipos existentes neste momento: {tipos}").strip().lower()
+                f"Tipos existentes neste momento: {tipos}:\n").strip().lower()
 
-        sala = input(f"Qual é a sala que tu queres: {SALAS}").strip().upper()
+        sala = input(f"Qual é a sala que tu queres: {SALAS} ").strip().upper()
         while sala not in SALAS:
             print("Essa sala não existe, escolhe uma válida! ")
-            sala = input(f"Salas existentes: {SALAS}").strip().upper()
+            sala = input(f"Salas existentes: {SALAS} ").strip().upper()
 
-        quantidade = int(input("Quantos tu queres adicionar?"))
+        quantidade = int(input("Quantos tu queres adicionar? "))
         while quantidade <= 0:
             print("Escolhe um número válido")
-            quantidade = int(input("Quantos tu queres adicionar?"))
+            quantidade = int(input("Quantos tu queres adicionar? "))
 #aqui e feito o registro de tudo 
         inventario[codigo] = {
             'nome': nome,
@@ -176,7 +176,7 @@ while flag_ativo:
             print(codigo, "|", item['nome'])
 
         pesquisa = input(
-            "Insere um código de algum produto válido:").strip().upper()
+            "Insere um código de algum produto válido: ").strip().upper()
         equipamento = inventario.get(pesquisa)
 
         if equipamento:
@@ -193,7 +193,7 @@ while flag_ativo:
             print(codigo, "|", item['nome'], item['estado'])
 
         codigo_input = str(input(
-            "Qual o código que queres alterar?")).strip().upper()
+            "Qual o código que queres alterar? ")).strip().upper()
 
         if codigo_input in inventario:
             estado_nestemomento = inventario[codigo_input]['estado']
@@ -203,7 +203,7 @@ while flag_ativo:
             new_inp = str(input(
                 "Qual o novo estado que tu queres? ")).strip().lower()
             while new_inp not in ESTADOS:
-                print("Não corresponde a nenhum valor existente nos estados")
+                print("Não corresponde a nenhum valor existente nos estados.")
                 new_inp = str(input(
                     "Qual o novo estado que tu queres? ")).strip().lower()
 
