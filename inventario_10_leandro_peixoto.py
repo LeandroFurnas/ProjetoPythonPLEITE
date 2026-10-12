@@ -79,10 +79,10 @@ inventario = {
 # Aqui é um ciclo no dicionário para saber quais os itens avariados
 # usando primeiro o for para pegar todos os valores e um if para
 # comparação
-lista_reparação = []
+lista_reparacao = []
 for reparavel in inventario:
     if inventario[reparavel]['estado'] == "avariado":
-        lista_reparação.append(reparavel)
+        lista_reparacao.append(reparavel)
 
 # Aqui é só as listas vazias para guardar o que tem por vir
 reparados = []
@@ -213,10 +213,10 @@ while flag_ativo:
                 inventario[codigo_input]['estado'] = new_inp
 
                 if new_inp == 'avariado':
-                    if codigo_input not in lista_reparação:
-                        lista_reparação.append(codigo_input)
-                elif codigo_input in lista_reparação:
-                    lista_reparação.remove(codigo_input)
+                    if codigo_input not in lista_reparacao:
+                        lista_reparacao.append(codigo_input)
+                elif codigo_input in lista_reparacao:
+                    lista_reparacao.remove(codigo_input)
 
                 historico.append(f"Estado de {codigo_input}: "
                                  f"{estado_nestemomento} -> {new_inp}")
@@ -229,35 +229,34 @@ while flag_ativo:
             item = inventario[codigo]
             print(codigo, "|", item['nome'], item['estado'])
 
-        new_inp2 = input(
-            "Qual o código do equipamento que queres remover?"
-        ).strip().upper()
-        while new_inp2 in inventario:
-            codigo_escolhido = inventario[new_inp2]['nome']
-            print(f"O produto que escolheste é o: {codigo_escolhido}")
-            deci2 = input("Tens a certeza que queres prosseguir? (s/n)")
-            deci2 = deci2.strip().lower()
-            if deci2 == 's':
-                del inventario[new_inp2]
-                while new_inp2 in lista_reparação:
-                    lista_reparação.remove(new_inp2)
-                    print(f"{new_inp2.upper()} foi eliminado da lista de "
-                          f"reparação com sucesso!")
-                historico.append(f"removeste: {new_inp2} / {codigo_escolhido}")
-                print(f"{new_inp2.upper()} foi eliminado do inventário "
-                      f"com sucesso!")
-
-            elif deci2 == 'n':
-                break
-            else:
-                print("Isso não é uma opção válida pedida")
+        new_inp2 = input("Qual o código do equipamento que queres remover?").strip().upper()
+        if new_inp2 not in inventario:
+            print("Isso nao existe!")
+        else:
+            while new_inp2 in inventario:
+                codigo_escolhido = inventario[new_inp2]['nome']
+                print(f"O produto que escolheste é o: {codigo_escolhido}")
+                deci2 = input("Tens a certeza que queres prosseguir? (s/n)")
+                deci2 = deci2.strip().lower()
+                if deci2 == 's':
+                    del inventario[new_inp2]
+                    while new_inp2 in lista_reparacao:
+                        lista_reparacao.remove(new_inp2)
+                        print(f"{new_inp2.upper()} foi eliminado da lista de reparação com sucesso!")
+                    historico.append(f"removeste: {new_inp2} / {codigo_escolhido}")
+                    print(f"{new_inp2.upper()} foi eliminado do inventário "
+                        f"com sucesso!")
+                elif deci2 == 'n':
+                    break
+                else:
+                    print("Isso não é uma opção válida pedida")
   #no 6 faz uma verificação na lista de reparação se estiver vazia faz print que esta fazia else mostra a lista de reparação e se quer processar
     elif escolha_menu == 6:
-        if not lista_reparação:
+        if not lista_reparacao:
             print("A lista está toda vazia")
         else:
             contadorNum = 1
-            for reparaçao in (lista_reparação):
+            for reparaçao in (lista_reparacao):
                 codigo_escolhido2 = inventario[reparaçao]['nome']
                 print(f"{contadorNum}. Nome: {reparaçao} - "
                       f"{codigo_escolhido2}")
@@ -265,11 +264,11 @@ while flag_ativo:
             deci3 = input("Queres processar todas as reparações? ")
             deci3 = deci3.strip().lower()
             if deci3 == 's':
-                while lista_reparação:
-                    historico.append(f"Estes foram processados e reparados: {lista_reparação[0]}")
-                    inventario[lista_reparação[0]]['estado'] = 'operacional'
-                    reparados.append(lista_reparação[0])
-                    itemRemovido = lista_reparação.pop(0)
+                while lista_reparacao:
+                    historico.append(f"Estes foram processados e reparados: {lista_reparacao[0]}")
+                    inventario[lista_reparacao[0]]['estado'] = 'operacional'
+                    reparados.append(lista_reparacao[0])
+                    itemRemovido = lista_reparacao.pop(0)
                     print(f"O {itemRemovido} vai ser reparado e ele vai ser "
                           f"removido da lista de reparação!")
                 print(f"Equipamentos reparados nesta sessão: {reparados}")
